@@ -8,9 +8,10 @@ import dev.paulosouza.addressapi.repository.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
 import java.util.Optional;
 
 @Service
@@ -62,5 +63,11 @@ public class AddressService {
 
     public void delete(long addressId) {
         this.addressRepository.deleteById(addressId);
+    }
+
+    public Page<AddressResponse> get(Pageable pageable) {
+        Page<Address> page = this.addressRepository.findAll(pageable);
+
+        return page.map(this.addressMapper::toResponse);
     }
 }

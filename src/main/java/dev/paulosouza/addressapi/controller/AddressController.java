@@ -50,8 +50,8 @@ public class AddressController {
 
     @GetMapping
     public ResponseEntity<Page<AddressResponse>> get(Pageable pageable) {
-//        this.addressService.get(pageable);
-        return ResponseEntity.ok(null);
+        Page<AddressResponse> addressResponses = this.addressService.get(pageable);
+        return ResponseEntity.ok(addressResponses);
     }
 
     @DeleteMapping(value = "/{addressId}")
