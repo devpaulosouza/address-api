@@ -66,8 +66,6 @@ class AddressServiceTest {
         when(addressRepository.findById(1L)).thenReturn(mockAddressCreate());
         when(addressMapper.toResponse(any())).thenReturn(mockAddressResponse);
 
-        AddressRequest addressRequest = mockAddressCreateRequest();
-
         AddressResponse addressResponse = this.addressService.get(1L);
         assertThat(addressResponse).isNotNull();
         assertThat(addressResponse).isEqualTo(mockAddressResponse);
