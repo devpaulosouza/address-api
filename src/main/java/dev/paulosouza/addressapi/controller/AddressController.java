@@ -44,8 +44,8 @@ public class AddressController {
 
     @GetMapping(value = "/{addressId}")
     public ResponseEntity<AddressResponse> get(@PathVariable Long addressId) {
-        this.addressService.get(addressId);
-        return ResponseEntity.ok(null);
+        AddressResponse addressResponse = this.addressService.get(addressId);
+        return ResponseEntity.ok(addressResponse);
     }
 
     @GetMapping
