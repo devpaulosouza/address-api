@@ -39,7 +39,7 @@ public class AddressRequest {
     * Considerando CEPs no Brasil, temos válido números como 319000-031 ou 319000031
     * */
     @NotNull
-    @Length(min = 8, max = 9)
+    @Length(min = 8, max = 20)
     private String zipCode;
 
     private Double latitude;

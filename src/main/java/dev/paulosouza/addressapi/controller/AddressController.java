@@ -5,11 +5,13 @@ import dev.paulosouza.addressapi.dto.request.AddressRequest;
 import dev.paulosouza.addressapi.dto.response.AddressResponse;
 import dev.paulosouza.addressapi.service.AddressService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -21,7 +23,7 @@ public class AddressController {
 
     @PostMapping
     public ResponseEntity<AddressResponse> create(
-            @RequestBody AddressRequest addressRequest,
+            @RequestBody @Valid AddressRequest addressRequest,
             HttpServletRequest request
     ) {
         AddressResponse addressResponse = this.addressService.create(addressRequest);
@@ -33,7 +35,7 @@ public class AddressController {
 
     @PutMapping(value = "/{addressId}")
     public ResponseEntity<AddressResponse> update(
-            @RequestBody AddressRequest addressRequest,
+            @RequestBody @Valid AddressRequest addressRequest,
             @PathVariable Long addressId
     ) {
         AddressResponse addressResponse = this.addressService.update(addressId, addressRequest);
@@ -47,7 +49,7 @@ public class AddressController {
     }
 
     @GetMapping
-    public ResponseEntity<AddressResponse> get(Pageable pageable) {
+    public ResponseEntity<Page<AddressResponse>> get(Pageable pageable) {
 //        this.addressService.get(pageable);
         return ResponseEntity.ok(null);
     }

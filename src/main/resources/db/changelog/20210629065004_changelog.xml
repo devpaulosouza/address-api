@@ -28,7 +28,7 @@
             <column name="street_name" type="VARCHAR(150)">
                 <constraints nullable="false"/>
             </column>
-            <column name="zip_code" type="VARCHAR(8)">
+            <column name="zip_code" type="VARCHAR(20)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

@@ -23,7 +23,7 @@ public class AddressService {
     private final AddressMapper addressMapper;
 
 
-    public AddressResponse create(@Valid AddressRequest addressRequest) {
+    public AddressResponse create(AddressRequest addressRequest) {
         Address address = this.addressMapper.toEntity(addressRequest);
 
         this.addressRepository.save(address);
