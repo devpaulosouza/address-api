@@ -1,5 +1,6 @@
 package dev.paulosouza.addressapi.service;
 
+import dev.paulosouza.addressapi.api.GeoLocationApi;
 import dev.paulosouza.addressapi.dto.request.AddressRequest;
 import dev.paulosouza.addressapi.dto.response.AddressResponse;
 import dev.paulosouza.addressapi.mapper.AddressMapper;
@@ -27,6 +28,9 @@ class AddressServiceTest {
 
     @Mock
     private AddressMapper addressMapper;
+
+    @Mock
+    private GeoLocationApi geoLocationApi;
 
     @Test
     void create() {

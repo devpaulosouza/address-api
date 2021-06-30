@@ -1,7 +1,9 @@
 package dev.paulosouza.addressapi.service;
 
+import dev.paulosouza.addressapi.api.GeoLocationApi;
 import dev.paulosouza.addressapi.dto.request.AddressRequest;
 import dev.paulosouza.addressapi.dto.response.AddressResponse;
+import dev.paulosouza.addressapi.dto.response.GeoLocationCoordinatesResponse;
 import dev.paulosouza.addressapi.mapper.AddressMapper;
 import dev.paulosouza.addressapi.model.Address;
 import dev.paulosouza.addressapi.repository.AddressRepository;
@@ -12,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -23,16 +26,27 @@ public class AddressService {
 
     private final AddressMapper addressMapper;
 
+    private final GeoLocationApi geoLocationApi;
+
 
     public AddressResponse create(AddressRequest addressRequest) {
         Address address = this.addressMapper.toEntity(addressRequest);
+        
+        if (!this.containsCoordinates(addressRequest)) {
+            GeoLocationCoordinatesResponse coordinates = this.geoLocationApi.fetchGeoLocation(addressRequest);
+
+            if (Objects.nonNull(coordinates)) {
+                address.setLatitude(coordinates.getLat());
+                address.setLongitude(coordinates.getLng());
+            }
+        }
 
         this.addressRepository.save(address);
 
         return this.addressMapper.toResponse(address);
     }
 
-    public AddressResponse update(long addressId, AddressRequest updateRequest) {
+    public AddressResponse update(long addressId, AddressRequest addressRequest) {
 
         Optional<Address> optionalAddress = this.addressRepository.findById(addressId);
 
@@ -40,9 +54,19 @@ public class AddressService {
             return null;
         }
 
+
         Address address = optionalAddress.get();
 
-        BeanUtils.copyProperties(updateRequest, address);
+        if (!this.containsCoordinates(addressRequest)) {
+            GeoLocationCoordinatesResponse coordinates = this.geoLocationApi.fetchGeoLocation(addressRequest);
+
+            if (Objects.nonNull(coordinates)) {
+                address.setLatitude(coordinates.getLat());
+                address.setLongitude(coordinates.getLng());
+            }
+        }
+
+        BeanUtils.copyProperties(addressRequest, address);
 
         this.addressRepository.save(address);
 
@@ -69,5 +93,10 @@ public class AddressService {
         Page<Address> page = this.addressRepository.findAll(pageable);
 
         return page.map(this.addressMapper::toResponse);
+    }
+
+    private boolean containsCoordinates(AddressRequest addressRequest) {
+        return Objects.nonNull(addressRequest.getLatitude())
+                && Objects.nonNull(addressRequest.getLongitude());
     }
 }
