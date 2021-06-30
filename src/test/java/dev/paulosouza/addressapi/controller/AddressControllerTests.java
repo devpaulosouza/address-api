@@ -11,6 +11,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static dev.paulosouza.addressapi.AddressMock.mockAddressCreateRequest;
+import static dev.paulosouza.addressapi.AddressMock.mockAddressUpdateRequest;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -31,7 +33,7 @@ public class AddressControllerTests {
 
     @Test
     void whenValidInputPost_thenReturns201() throws Exception {
-        AddressRequest addressRequest = new AddressRequest();
+        AddressRequest addressRequest = mockAddressCreateRequest();
 
         mockMvc.perform(
                 post("/addresses")
@@ -43,7 +45,7 @@ public class AddressControllerTests {
 
     @Test
     void whenValidInputPut_thenReturns200() throws Exception {
-        AddressRequest addressRequest = new AddressRequest();
+        AddressRequest addressRequest = mockAddressUpdateRequest();
 
         mockMvc.perform(
                 put("/addresses/1")
