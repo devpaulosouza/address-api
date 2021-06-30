@@ -22,6 +22,9 @@
             <column name="state" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
+            <column name="country" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
             <column name="street_name" type="VARCHAR(150)">
                 <constraints nullable="false"/>
             </column>

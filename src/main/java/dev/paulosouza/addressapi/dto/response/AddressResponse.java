@@ -1,15 +1,17 @@
 package dev.paulosouza.addressapi.dto.response;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class AddressResponse {
 
     private Long id;
 
     private String streetName;
 
-    private int number;
+    private String number;
 
     private String complement;
 
@@ -18,6 +20,8 @@ public class AddressResponse {
     private String city;
 
     private String state;
+
+    private String country;
 
     private String zipCode;
 

@@ -1,11 +1,13 @@
 package dev.paulosouza.addressapi.dto.request;
 
+import lombok.Builder;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 
 @Data
+@Builder
 public class AddressRequest {
 
     @NotNull
@@ -26,6 +28,10 @@ public class AddressRequest {
     @NotNull
     @Length(min = 1, max = 50)
     private String city;
+
+    @NotNull
+    @Length(min = 1, max = 50)
+    private String country;
 
     @NotNull
     @Length(min = 1, max = 50)

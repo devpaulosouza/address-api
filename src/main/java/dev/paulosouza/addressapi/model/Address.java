@@ -32,6 +32,9 @@ public class Address {
     @Column(nullable = false, length = 50)
     private String state;
 
+    @Column(nullable = false, length = 50)
+    private String country;
+
     @Column(nullable = false, length = 8)
     private String zipCode;
 

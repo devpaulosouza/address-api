@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = AddressController.class)
@@ -31,14 +31,62 @@ public class AddressControllerTests {
 
     @Test
     void whenValidInputPost_thenReturns201() throws Exception {
-        AddressRequest addressRequest = new AddressRequest();
+        AddressRequest addressRequest = AddressRequest.builder().build();
 
         mockMvc.perform(
                 post("/addresses")
-                    .content(objectMapper.writeValueAsString(addressRequest))
-                    .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(addressRequest))
+                        .contentType(MediaType.APPLICATION_JSON)
         )
                 .andExpect(status().isCreated());
+    }
+
+    @Test
+    void whenValidInputPut_thenReturns200() throws Exception {
+        AddressRequest addressRequest = AddressRequest.builder().build();
+
+        mockMvc.perform(
+                put("/addresses/1")
+                        .content(objectMapper.writeValueAsString(addressRequest))
+                        .contentType(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void whenGetAll_thenReturns200() throws Exception {
+        AddressRequest addressRequest = AddressRequest.builder().build();
+
+        mockMvc.perform(
+                get("/addresses")
+                        .content(objectMapper.writeValueAsString(addressRequest))
+                        .contentType(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void whenGetOne_thenReturns200() throws Exception {
+        AddressRequest addressRequest = AddressRequest.builder().build();
+
+        mockMvc.perform(
+                get("/addresses/1")
+                        .content(objectMapper.writeValueAsString(addressRequest))
+                        .contentType(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void whenDelete_thenReturns200() throws Exception {
+        AddressRequest addressRequest = AddressRequest.builder().build();
+
+        mockMvc.perform(
+                delete("/addresses/1")
+                        .content(objectMapper.writeValueAsString(addressRequest))
+                        .contentType(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(status().isOk());
     }
 
 }
