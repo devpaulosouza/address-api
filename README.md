@@ -7,13 +7,13 @@
 
 ## Recursos
 
-[GET] `http://localhost:8080/addesses?page=0&size=10`
+[GET] `http://localhost:8080/addresses?page=0&size=10`
 Faz uma consulta paginada dos registros salvos no banco
 
-[GET] `http://localhost:8080/addesses/{addressId}`
+[GET] `http://localhost:8080/addresses/{addressId}`
 Faz uma consulta de um registro único de endereço por id (Long)
 
-[POST] `http://localhost:8080/addesses`
+[POST] `http://localhost:8080/addresses`
 Cria um novo registro de endereço. Aceita como body um json com os dados no seguinte formato:
 
 Os campos latitude e longitude são opcionais. Caso não sejam informados, será feito uma consulta na API de geolocalização do Google tentando buscar as coordenadas.
@@ -31,11 +31,11 @@ Os campos latitude e longitude são opcionais. Caso não sejam informados, será
 }
 ```
 
-[PUT] `http://localhost:8080/addesses/{addressId}`
+[PUT] `http://localhost:8080/addresses/{addressId}`
 Atualiza o registro com os novos dados informados. O corpo da requisição válido é o mesmo do `POST`
 
 
-[DELETE] `http://localhost:8080/addesses/{addressId}`
+[DELETE] `http://localhost:8080/addresses/{addressId}`
 Exclui um registro por id (Long)
 
 
