@@ -1,13 +1,11 @@
 package dev.paulosouza.addressapi.dto.request;
 
-import lombok.Builder;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 
 @Data
-@Builder
 public class AddressRequest {
 
     @NotNull

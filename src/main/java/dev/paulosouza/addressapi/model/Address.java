@@ -7,7 +7,6 @@ import javax.persistence.*;
 @Entity
 @Table
 @Data
-@Builder
 public class Address {
 
     @Id

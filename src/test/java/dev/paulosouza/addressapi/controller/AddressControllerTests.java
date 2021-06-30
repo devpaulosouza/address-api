@@ -31,7 +31,7 @@ public class AddressControllerTests {
 
     @Test
     void whenValidInputPost_thenReturns201() throws Exception {
-        AddressRequest addressRequest = AddressRequest.builder().build();
+        AddressRequest addressRequest = new AddressRequest();
 
         mockMvc.perform(
                 post("/addresses")
@@ -43,7 +43,7 @@ public class AddressControllerTests {
 
     @Test
     void whenValidInputPut_thenReturns200() throws Exception {
-        AddressRequest addressRequest = AddressRequest.builder().build();
+        AddressRequest addressRequest = new AddressRequest();
 
         mockMvc.perform(
                 put("/addresses/1")
@@ -55,11 +55,8 @@ public class AddressControllerTests {
 
     @Test
     void whenGetAll_thenReturns200() throws Exception {
-        AddressRequest addressRequest = AddressRequest.builder().build();
-
         mockMvc.perform(
                 get("/addresses")
-                        .content(objectMapper.writeValueAsString(addressRequest))
                         .contentType(MediaType.APPLICATION_JSON)
         )
                 .andExpect(status().isOk());
@@ -67,11 +64,8 @@ public class AddressControllerTests {
 
     @Test
     void whenGetOne_thenReturns200() throws Exception {
-        AddressRequest addressRequest = AddressRequest.builder().build();
-
         mockMvc.perform(
                 get("/addresses/1")
-                        .content(objectMapper.writeValueAsString(addressRequest))
                         .contentType(MediaType.APPLICATION_JSON)
         )
                 .andExpect(status().isOk());
@@ -79,11 +73,8 @@ public class AddressControllerTests {
 
     @Test
     void whenDelete_thenReturns200() throws Exception {
-        AddressRequest addressRequest = AddressRequest.builder().build();
-
         mockMvc.perform(
                 delete("/addresses/1")
-                        .content(objectMapper.writeValueAsString(addressRequest))
                         .contentType(MediaType.APPLICATION_JSON)
         )
                 .andExpect(status().isOk());
